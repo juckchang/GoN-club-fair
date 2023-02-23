@@ -20,6 +20,7 @@ export default async function handler(req, res) {
       if (e.errno === 19) {
         const users = await db.all('SELECT studentID FROM users WHERE studentID=? and phone=?', [studentID, phone])
         if (users.length === 1 && users[0].studentID !== undefined) {
+          console.log(`${studentID}님 가입 완료.`)
           res.status(200).json({ status: true, token: sign({ studentID }) }) 
         } else {
           res.status(200).json({ status: false, msg: 'duplicate' })

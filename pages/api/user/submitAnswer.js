@@ -20,6 +20,10 @@ export default async function handler(req, res) {
         else if (stage === 6) return allStageInfo.stage6
         else if (stage === 7) return allStageInfo.stage7
       })(stage)
+
+      console.log(`${studentID}님이 stage${stage}에 답변 ${answer}를 제출하셨습니다.`)
+      console.log(`stage${stage}의 답: ${stageInfo.answer}`)
+
       const createdAt = users[0].createdAt
       const date = new Date(createdAt)
       date.setMinutes(date.getMinutes() + 20)
@@ -33,6 +37,9 @@ export default async function handler(req, res) {
           const diffInSec = Math.floor((diffInMs / 1000) % 60)
           solved.remainTime = (diffInMin) * 60 + diffInSec
           solved.solves.push(stage)
+          console.log(`${studentID}님이 stage${stage} 정답을 맞추셨습니다.`)
+          console.log(solved)
+
           db.run('UPDATE users SET solved=?, updatedAt=datetime("now", "+9 hours") WHERE studentID=?', [JSON.stringify(solved), studentID]).then(r=>{
             res.status(200).json({ status: true, msg: stageInfo.score })
           }).catch(e =>{
