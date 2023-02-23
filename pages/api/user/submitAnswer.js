@@ -13,6 +13,7 @@ export default async function handler(req, res) {
       const solved = JSON.parse(users[0].solved)
       const stageInfo = (()=> {
         if (stage === 1) return allStageInfo.stage1
+        else if (stage === 2) return allStageInfo.stage2
       })(stage)
       const createdAt = users[0].createdAt
       const date = new Date(createdAt)
@@ -24,7 +25,7 @@ export default async function handler(req, res) {
           const diffInMs = Math.abs((new Date()).getTime() - date.getTime())
 
           const diffInMin = Math.floor(diffInMs / 1000 / 60)
-
+          const diffInSec = Math.floor((diffInMs / 1000) % 60)
           solved.remainTime = (diffInMin) * 60 + diffInSec
           solved.solves.push(stage)
           db.run('UPDATE users SET solved=?, updatedAt=datetime("now", "+9 hours") WHERE studentID=?', [JSON.stringify(solved), studentID]).then(r=>{
@@ -38,11 +39,11 @@ export default async function handler(req, res) {
       } else {
         res.status(200).json({ status: false, msg: 'Wrong answer' })
       }
-
     } else {
-      res.status(200).json({ status: false })
+      res.status(200).json({ status: false, msg: 'Token error 1' })
     }
   } catch (e) {
-    res.status(200).json({ status: false })
+    console.log(e)
+    res.status(200).json({ status: false, msg: 'Token error 2' })
   }
 }

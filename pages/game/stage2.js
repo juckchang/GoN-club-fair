@@ -34,9 +34,12 @@ export default function Rule() {
     if (/GoN\{(.*)\}/.test(answer)) {
       const req = await axios.post('/api/user/submitAnswer', { token, answer, stage: 2 })
       if (req.data.status) {
+        setAnswerError(false)
         setSolved(true)
         setScore(req.data.msg)
         setTimeout(() => router.push('/game/stage3'), 2000)
+      } else {
+        setAnswerError(true)
       }
     }
   }
@@ -118,7 +121,10 @@ export default function Rule() {
       </nav>
 
       <main className={styles.main}>
-        <p>스테이지2의 답은 <b>GoN{"{연습문제입니다}"}</b> 입니다.</p>
+        <p>MON = 3</p>
+        <p>TUE = 5</p>
+        <p>WED = 4</p>
+        <p>THU = ?</p>
         <p>------------------------------------------------------------------------------------------</p>
         <TextField
           id="answer"
