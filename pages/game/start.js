@@ -93,7 +93,7 @@ export default function Rule() {
         <br />
         {(new Date() < time) ? 
           <Button color="primary" variant="text" startIcon={<FlagIcon />} sx={hoverStyle} onClick={e => handleClick(e, "/game/stage1")}>
-            <b style={textStyle}>Stage1</b>
+            <b style={textStyle}>GOGO</b>
           </Button>
         : 
           <Button color="primary" variant="text" startIcon={<MilitaryTechIcon />} sx={hoverStyle} onClick={e => handleClick(e, "/game/rank")}>
