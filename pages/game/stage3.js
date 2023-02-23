@@ -37,7 +37,7 @@ export default function Rule() {
         setAnswerError(false)
         setSolved(true)
         setScore(req.data.msg)
-        setTimeout(() => router.push('/game/stage3'), 2000)
+        setTimeout(() => router.push('/game/stage4'), 2000)
       } else {
         setAnswerError(true)
       }
@@ -72,7 +72,7 @@ export default function Rule() {
           setToken(localStorage.getItem('token'))
           const req = await axios.post('/api/user/getStage', { token: localStorage.getItem('token') })
           const { stage } = req.data
-          if (stage !== 2) { // stage1에만 있는거
+          if (stage !== 3) { // stage1에만 있는거
             router.push(`/game/stage${stage-1}`)
           } else {
             const req = await axios.post('/api/user/getStartTime', { token: localStorage.getItem('token') })
@@ -121,12 +121,9 @@ export default function Rule() {
       </nav>
 
       <main className={styles.main}>
-        <p>Stage 2</p>
+        <p>Stage 3</p>
         <br />
-        <p>MON = 3</p>
-        <p>TUE = 5</p>
-        <p>WED = 4</p>
-        <p>THU = ?</p>
+        <p>115 15 16 19 ?</p>
         <p>------------------------------------------------------------------------------------------</p>
         <TextField
           id="answer"

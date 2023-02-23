@@ -121,6 +121,8 @@ export default function Rule() {
       </nav>
 
       <main className={styles.main}>
+        <p>Stage 1</p>
+        <br />
         <p>스테이지1의 답은 <b>GoN{"{연습문제입니다}"}</b> 입니다.</p>
         <p>------------------------------------------------------------------------------------------</p>
         <TextField
