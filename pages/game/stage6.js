@@ -131,7 +131,7 @@ export default function Rule() {
           <b style={textStyle}>힌트보기</b>
         </Button>
         {hint ? 'view source code' : ''}
-        {/* GoN{answer_in_html} */}
+        {/* GoN{answer_in_source_code} */}
         <p>------------------------------------------------------------------------------------------</p>
         <TextField
           id="answer"
