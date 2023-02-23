@@ -17,18 +17,17 @@ export default async function handler(req, res) {
     db.run('INSERT INTO users VALUES(?, ?, ?, null, datetime("now", "+9 hours"))', [studentID, phone, JSON.stringify(initData)]).then(r => {
       res.status(200).json({ status: true, token: sign({ studentID }) }) 
     }).catch(async e => {
-      console.log(e)
       if (e.errno === 19) {
         const users = await db.all('SELECT studentID FROM users WHERE studentID=? and phone=?', [studentID, phone])
         if (users.length === 1 && users[0].studentID !== undefined) {
           res.status(200).json({ status: true, token: sign({ studentID }) }) 
         } else {
-          res.status(403).json({ status: false, msg: 'duplicate' })
+          res.status(200).json({ status: false, msg: 'duplicate' })
         }
       }
-      else res.status(403).json({ status: false, msg: '' })
+      else res.status(200).json({ status: false, msg: '' })
     })
   } else {
-    res.status(403).json({ status: false, msg: 'validate' })
+    res.status(200).json({ status: false, msg: 'validate' })
   }
 }

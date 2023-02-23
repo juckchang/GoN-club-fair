@@ -14,7 +14,6 @@ export default async function handler(req, res) {
       const stageInfo = (()=> {
         if (stage === 1) return allStageInfo.stage1
       })(stage)
-      console.log(stageInfo)
       const createdAt = users[0].createdAt
       const date = new Date(createdAt)
       date.setMinutes(date.getMinutes() + 20)
@@ -22,33 +21,28 @@ export default async function handler(req, res) {
         if (solved.lastStage === stage && !solved.solves.includes(stage)) {
           solved.lastStage = stage + 1
           solved.score += stageInfo.score
-          console.log(createdAt)
           const diffInMs = Math.abs((new Date()).getTime() - date.getTime())
 
           const diffInMin = Math.floor(diffInMs / 1000 / 60)
-          const diffInSec = Math.floor((diffInMs / 1000) % 60)
-          console.log(diffInMin)
-          console.log(diffInSec)
+
           solved.remainTime = (diffInMin) * 60 + diffInSec
           solved.solves.push(stage)
           db.run('UPDATE users SET solved=?, updatedAt=datetime("now", "+9 hours") WHERE studentID=?', [JSON.stringify(solved), studentID]).then(r=>{
             res.status(200).json({ status: true, msg: stageInfo.score })
           }).catch(e =>{
-            console.log(e)
-            res.status(500).json({ status: false, msg: 'error' })
+            res.status(200).json({ status: false, msg: 'error' })
           })
         } else {
-          res.status(403).json({ status: false, msg: 'Wrong Stage' })
+          res.status(200).json({ status: false, msg: 'Wrong Stage' })
         }
       } else {
-        res.status(403).json({ status: false, msg: 'Wrong answer' })
+        res.status(200).json({ status: false, msg: 'Wrong answer' })
       }
 
     } else {
-      res.status(403).json({ status: false })
+      res.status(200).json({ status: false })
     }
   } catch (e) {
-    console.log(e)
-    res.status(403).json({ status: false })
+    res.status(200).json({ status: false })
   }
 }

@@ -12,10 +12,9 @@ export default async function handler(req, res) {
       const { createdAt } = users[0]
       res.status(200).json({ status: true, createdAt })
     } else {
-      res.status(403).json({ status: false })
+      res.status(200).json({ status: false })
     }
   } catch (e) {
-    console.log(e)
-    res.status(403).json({ status: false })
+    res.status(200).json({ status: false })
   }
 }

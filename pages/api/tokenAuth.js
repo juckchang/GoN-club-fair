@@ -11,10 +11,9 @@ export default async function handler(req, res) {
     if (users.length === 1 && users[0].studentID !== undefined) {
       res.status(200).json({ status: true })
     } else {
-      res.status(403).json({ status: false })
+      res.status(200).json({ status: false })
     }
   } catch (e) {
-    console.log(e)
-    res.status(403).json({ status: false })
+    res.status(200).json({ status: false })
   }
 }

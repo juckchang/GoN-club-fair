@@ -34,9 +34,12 @@ export default function Rule() {
     if (/GoN\{(.*)\}/.test(answer)) {
       const req = await axios.post('/api/user/submitAnswer', { token, answer, stage: 1 })
       if (req.data.status) {
+        setAnswerError(false)
         setSolved(true)
         setScore(req.data.msg)
         setTimeout(()=>router.push('/game/stage2'), 2000)
+      } else {
+        setAnswerError(true)
       }
     }
   }
@@ -55,7 +58,7 @@ export default function Rule() {
   const [token, setToken] = useState('')
   const [diffMin, setDiffMin] = useState(0)
   const [diffSec, setDiffSec] = useState(0)
-  const [answerError, setAnswerError] = useState(0)
+  const [answerError, setAnswerError] = useState(false)
   const [solved, setSolved] = useState(false)
   const [score, setScore] = useState(0)
 
