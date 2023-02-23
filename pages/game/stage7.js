@@ -127,7 +127,7 @@ export default function Rule() {
         <p>Stage 7</p>
         <br />
         <p>
-          answer = "GoN{'{????????????}'}"<br/>
+          answer = &quot;GoN{'{????????????}'}&quot;<br/>
           key = ?<br />
           encode = []<br />
           for i in answer:<br />
