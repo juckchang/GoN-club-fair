@@ -80,7 +80,7 @@ export default function Rule() {
                   </TableCell>
                   <TableCell style={{ width: 160 }} align="center">{row.studentID}</TableCell>
                   <TableCell style={{ width: 160 }} align="center">{JSON.parse(row.solved).score}</TableCell>
-                  <TableCell style={{ width: 160 }} align="center">{Math.floor(JSON.parse(row.solved).remainTime / 60) + ':' + Math.floor(JSON.parse(row.solved).remainTime % 60)}</TableCell>
+                  <TableCell style={{ width: 160 }} align="center">{Math.floor(JSON.parse(row.solved).remainTime / 60).toString().padStart(2, '0') + ':' + Math.floor(JSON.parse(row.solved).remainTime % 60).toString().padStart(2, '0')}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

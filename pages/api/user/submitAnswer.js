@@ -15,6 +15,10 @@ export default async function handler(req, res) {
         if (stage === 1) return allStageInfo.stage1
         else if (stage === 2) return allStageInfo.stage2
         else if (stage === 3) return allStageInfo.stage3
+        else if (stage === 4) return allStageInfo.stage4
+        else if (stage === 5) return allStageInfo.stage5
+        else if (stage === 6) return allStageInfo.stage6
+        else if (stage === 7) return allStageInfo.stage7
       })(stage)
       const createdAt = users[0].createdAt
       const date = new Date(createdAt)

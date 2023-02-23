@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import Image from 'next/image'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import BookIcon from '@mui/icons-material/Book';
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 
 import { Button } from '@mui/material'
 import { useRouter } from "next/router"
@@ -44,6 +45,10 @@ export default function Home() {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button color="primary" variant="text" startIcon={<BookIcon />} sx={hoverStyle} onClick={e => handleClick(e, "/rule")}>
             <b style={textStyle}>규칙보기</b>
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button color="primary" variant="text" startIcon={<MilitaryTechIcon />} sx={hoverStyle} onClick={e => handleClick(e, "/game/rank")}>
+            <b style={textStyle}>순위보기</b>
           </Button>
         </div>
 

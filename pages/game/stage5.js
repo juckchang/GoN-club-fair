@@ -3,10 +3,11 @@ import Header from '../../components/Header'
 import Box from '@mui/material/Box'
 import axios from 'axios'
 import TextField from '@mui/material/TextField'
-import KeyIcon from '@mui/icons-material/Key';
+
 import { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
 import { Button } from '@mui/material'
+import KeyIcon from '@mui/icons-material/Key';
 
 export default function Rule() {
   function useInterval(callback, delay) {
@@ -33,12 +34,12 @@ export default function Rule() {
   const handleAnswer = async (e) => {
     const answer = e.target.value
     if (/GoN\{(.*)\}/.test(answer)) {
-      const req = await axios.post('/api/user/submitAnswer', { token, answer, stage: 3 })
+      const req = await axios.post('/api/user/submitAnswer', { token, answer, stage: 5 })
       if (req.data.status) {
         setAnswerError(false)
         setSolved(true)
         setScore(req.data.msg)
-        setTimeout(() => router.push('/game/stage4'), 2000)
+        setTimeout(() => router.push('/game/stage6'), 2000)
       } else {
         setAnswerError(true)
       }
@@ -62,7 +63,6 @@ export default function Rule() {
   const [answerError, setAnswerError] = useState(0)
   const [solved, setSolved] = useState(false)
   const [score, setScore] = useState(0)
-  const [hint, setHint] = useState(false)
 
   const [time, setTime] = useState(new Date())
 
@@ -74,7 +74,7 @@ export default function Rule() {
           setToken(localStorage.getItem('token'))
           const req = await axios.post('/api/user/getStage', { token: localStorage.getItem('token') })
           const { stage } = req.data
-          if (stage !== 3) { // stage1에만 있는거
+          if (stage !== 5) { // stage1에만 있는거
             router.push(`/game/stage${stage-1}`)
           } else {
             const req = await axios.post('/api/user/getStartTime', { token: localStorage.getItem('token') })
@@ -94,7 +94,7 @@ export default function Rule() {
     }
     init()
   }, []);
-
+  const [hint, setHint] = useState(false)
   useInterval(() => {
     const diffInMs = Math.abs((new Date()).getTime() - time.getTime())
 
@@ -123,13 +123,13 @@ export default function Rule() {
       </nav>
 
       <main className={styles.main}>
-        <p>Stage 3</p>
+        <p>Stage 5</p>
         <br />
-        <p>0x7ff3e93a13 = ?</p>
+        <p>R29Oe2Jhc2U2NF9lbmMwZGluZ18xc19zMF9jb252ZW5pZW50fQ==</p>
         <Button color="primary" variant="text" startIcon={<KeyIcon />} sx={hoverStyle} onClick={e => setHint(true)}>
           <b style={textStyle}>힌트보기</b>
         </Button>
-        {hint ? '10진수, 16진수' : ''}
+        {hint ? 'encoding' : ''}
         <p>------------------------------------------------------------------------------------------</p>
         <TextField
           id="answer"
