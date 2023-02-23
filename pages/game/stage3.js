@@ -32,7 +32,7 @@ export default function Rule() {
   const handleAnswer = async (e) => {
     const answer = e.target.value
     if (/GoN\{(.*)\}/.test(answer)) {
-      const req = await axios.post('/api/user/submitAnswer', { token, answer, stage: 2 })
+      const req = await axios.post('/api/user/submitAnswer', { token, answer, stage: 3 })
       if (req.data.status) {
         setAnswerError(false)
         setSolved(true)
